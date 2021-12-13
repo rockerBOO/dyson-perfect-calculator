@@ -1,7 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+	<head>
 	<meta charset="utf-8" />
 	<title><%= htmlWebpackPlugin.options.title %></title>
+<style>
+	body {
+		font-size: 12px;
+}
+
+.result {
+	display: grid;
+	grid-template-columns: 1em 1.5em auto;
+	grid-gap: 8px;
+}
+</style>
 </head>
 <body>
 	<div id="app"></div>
