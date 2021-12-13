@@ -44,7 +44,7 @@ export const dspCrafts: Craft[] = [
     time: 4,
     requirements: [[2, 1007]],
   },
-	// Particle Container
+  // Particle Container
   {
     result: [[1, 1206]],
     type: "assembler",
@@ -64,7 +64,7 @@ export const dspCrafts: Craft[] = [
       [2, 1104],
     ],
   },
-	// Electromagnetic turbine
+  // Electromagnetic turbine
   {
     result: [[1, 1204]],
     type: "assembler",
@@ -147,26 +147,27 @@ export const dspCrafts: Craft[] = [
       [2, 1304],
     ],
   },
-	// Graphene
-{ 
-	result: [[2, 1123]],
-		type: 'chemical',
-		time: 3, 
-	requirements: [
-			[3, 1109],
-			[1, 1116]
-		],
-	},
-	// Sulfuric Acid
-	{ result: [[4, 1116]],
-		type: 'chemical', 
-		time: 6,
-	requirements: [
-			[6, 1114],
-			[8, 1005],
-			[4, 1000]
-		],
-	},
+  // Graphene
+  {
+    result: [[2, 1123]],
+    type: "chemical",
+    time: 3,
+    requirements: [
+      [3, 1109],
+      [1, 1116],
+    ],
+  },
+  // Sulfuric Acid
+  {
+    result: [[4, 1116]],
+    type: "chemical",
+    time: 6,
+    requirements: [
+      [6, 1114],
+      [8, 1005],
+      [4, 1000],
+    ],
+  },
   // Processor
   {
     result: [[1, 1303]],
@@ -322,14 +323,11 @@ export const dspItems: Item[] = [
     name: "Titanium ore",
     icon: "https://dsp-wiki.com/images/9/91/Icon_Titanium_Ore.png",
   },
-	
   {
     id: 1005,
     name: "Stone",
     icon: "https://dsp-wiki.com/images/5/5a/Icon_Stone.png",
   },
-	
-
   {
     id: 1007,
     name: "Crude Oil",
@@ -360,12 +358,12 @@ export const dspItems: Item[] = [
     name: "High-purity silicon",
     icon: "https://dsp-wiki.com/images/8/8a/Icon_High-Purity_Silicon.png",
   },
-{
-		id: 1109,
-		name: 'Energetic graphite',
-		icon: "https://dsp-wiki.com/images/1/11/Icon_Energetic_Graphite.png"
-		},
- {
+  {
+    id: 1109,
+    name: "Energetic graphite",
+    icon: "https://dsp-wiki.com/images/1/11/Icon_Energetic_Graphite.png",
+  },
+  {
     id: 1112,
     name: "Diamond",
     icon: "https://dsp-wiki.com/images/a/af/Icon_Diamond.png",
@@ -395,10 +393,11 @@ export const dspItems: Item[] = [
     name: "Plastic",
     icon: "https://dsp-wiki.com/images/c/c8/Icon_Plastic.png",
   },
-	{ id: 1116,
-		name: "Sulfuric acid",
-		icon: "https://dsp-wiki.com/images/5/53/Icon_Sulfuric_Acid.png"
-		},
+  {
+    id: 1116,
+    name: "Sulfuric acid",
+    icon: "https://dsp-wiki.com/images/5/53/Icon_Sulfuric_Acid.png",
+  },
   {
     id: 1117,
     name: "Organic Crystal",
@@ -526,14 +525,16 @@ export const dspItems: Item[] = [
   },
 ];
 
-
 export const findName = (findId: number) =>
   dspItems.filter(({ id }) => id == findId).reduce((_, { name }) => name, "");
 
 export const findIcon = (findId: number) =>
   dspItems.filter(({ id }) => id == findId).reduce((_, { icon }) => icon, "");
 
-export const calculateRequirements = ([requestedAmount, requestedItemId]: [number, number]): Array<CraftTree> => {
+export const calculateRequirements = ([requestedAmount, requestedItemId]: [
+  number,
+  number
+]): Array<CraftTree> => {
   // look up all crafts that create this item
 
   const crafts = dspCrafts.filter(({ result }) => {
@@ -544,24 +545,28 @@ export const calculateRequirements = ([requestedAmount, requestedItemId]: [numbe
     );
   });
 
-	if (crafts.length === 0) {
-		console.log('no crafts for ' + findName(requestedItemId))
-		// Assuming if there are no crafts that we can source the material
-	return [{
-		result: [[requestedAmount, requestedItemId]],
-		type: 'miner',
-		time: 0,
-		requirements: []
-	}]
-	}
+  if (crafts.length === 0) {
+    console.log("no crafts for " + findName(requestedItemId));
+    // FIXME Assuming if there are no crafts that we can source the material via the miner
+    return [
+      {
+        result: [[requestedAmount, requestedItemId]],
+        type: "miner",
+        time: 0,
+        requirements: [],
+      },
+    ];
+  }
 
   return crafts.map((craft) => {
-		console.log(craft.requirements)
+    console.log(craft.requirements);
     return {
       ...craft,
-      requirements: craft.requirements.flatMap(([requirementAmount, requirementItemId]) => {
-        return calculateRequirements([requirementAmount, requirementItemId]);
-      }),
+      requirements: craft.requirements.flatMap(
+        ([requirementAmount, requirementItemId]) => {
+          return calculateRequirements([requirementAmount, requirementItemId]);
+        }
+      ),
     };
   });
 };
