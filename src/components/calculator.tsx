@@ -1,12 +1,7 @@
 import { ChangeEventHandler, useState } from "react";
 import {
-  Item,
-  dspItems,
-  findIcon,
-  calculateRequirements,
-  Craft,
-  findName,
-  CraftTree,
+    calculateRequirements, CraftTree, dspItems,
+    findIcon, findName, Item
 } from "../data";
 import Recipes from "./Recipes";
 
@@ -43,37 +38,42 @@ const Recipe = ({ recipe }: { recipe: CraftTree }) => {
         })}
         {recipe.type}
       </div>
-			{recipe.type !== 'miner' ?
-      <div
-        className="time"
-        style={{
-          display: "grid",
-          justifyContent: "center",
-          gridTemplateRows: "36px 50px",
-        }}
-      >
+      {recipe.type !== "miner" ? (
         <div
-          className="time-amount"
+          className="time"
           style={{
-            fontSize: "1.1em",
             display: "grid",
             justifyContent: "center",
+            gridTemplateRows: "36px 50px",
           }}
         >
-          {recipe.time}s
+          <div
+            className="time-amount"
+            style={{
+              fontSize: "1.1em",
+              display: "grid",
+              justifyContent: "center",
+            }}
+          >
+            {recipe.time}s
+          </div>
+          <div>&lt;--</div>
         </div>
-        <div>
-				&lt;--
+      ) : (
+        <></>
+      )}
+      {recipe.type !== "miner" ? (
+        <div className="requirements">
+          {recipe.requirements.length == 0
+            ? "no requirements for " + findName(recipe.result[0][1])
+            : ""}
+          {recipe.requirements.map((r) => {
+            return <Recipe recipe={r} />;
+          })}
         </div>
-</div> : <></>}
-			{recipe.type !== 'miner' ?
-      <div className="requirements">
-{recipe.requirements.length == 0 ? 'no requirements for ' + findName(recipe.result[0][1]) : ''}
-        {recipe.requirements.map((r) => {
-          return <Recipe recipe={r} />;
-        })}
-      </div>
-			: <></>}
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
