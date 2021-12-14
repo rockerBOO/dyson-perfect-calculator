@@ -1,4 +1,4 @@
-import { findIcon, findName, dspCrafts } from "../data";
+import { findIcon, findName, dspRecipes } from "../data";
 
 const Recipes = () => {
   return (
@@ -12,7 +12,7 @@ const Recipes = () => {
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr)",
         }}
       >
-        {dspCrafts.map((craft) => {
+        {dspRecipes.map((craft) => {
           return (
 						<div style={{ backgroundColor: 'hsla(170, 20%, 20%, .05)', padding: 16 }}>
               <div>

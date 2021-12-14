@@ -2,30 +2,46 @@
  * Describes how a craft will run and the requirements for the craft.
  * @param requirements [number, number][]: tuple of amount and item id; example [1, 1022]
  */
-export type Craft = {
+export type Recipe = {
   result: [number, number][];
   type: "assembler" | "smelter" | "collider" | "refiner" | "chemical" | "miner";
   time: number;
+  producers?: Recipe[];
   requirements: [number, number][];
 };
 
-export type CraftTree = {
+export type RecipeTree = {
   result: [number, number][];
   type: "assembler" | "smelter" | "collider" | "refiner" | "chemical" | "miner";
   time: number;
-  requirements: CraftTree[];
+  requirements: RecipeTree[];
 };
 
-export const dspCrafts: Craft[] = [
+export const dspRecipes: Recipe[] = [
+  // Steel
+  {
+    result: [[1, 1103]],
+    type: "smelter",
+    time: 3,
+    requirements: [[3, 1101]],
+  },
+  // Strange Matter
   {
     result: [[1, 1127]],
-    type: "assembler",
+    type: "collider",
     time: 8,
     requirements: [
       [2, 1206],
       [2, 1101],
       [10, 1121],
     ],
+  },
+  // Gear
+  {
+    result: [[1, 1201]],
+    type: "assembler",
+    time: 1,
+    requirements: [[1, 1101]],
   },
   // Deuterium
   {
@@ -96,7 +112,12 @@ export const dspCrafts: Craft[] = [
     ],
   },
   // Magnet
-  { result: [[1, 1102]], type: "smelter", time: 1, requirements: [[1, 1001]] },
+  {
+    result: [[1, 1102]],
+    type: "smelter",
+    time: 1.5,
+    requirements: [[1, 1001]],
+  },
   // Copper Ingot
   { result: [[1, 1104]], type: "smelter", time: 1, requirements: [[1, 1002]] },
   // Iron Ingot
@@ -236,7 +257,26 @@ export const dspCrafts: Craft[] = [
     time: 2,
     requirements: [[2, 1006]],
   },
-
+  {
+    result: [[2, 1124]],
+    type: "chemical",
+    time: 4,
+    requirements: [
+      [3, 1123],
+      [1, 1106],
+    ],
+  },
+  // Titanium Alloy
+  {
+    result: [[4, 1107]],
+    type: "smelter",
+    time: 12,
+    requirements: [
+      [4, 1106],
+      [4, 1103],
+      [8, 1116],
+    ],
+  },
   // Casimir Crystal
   {
     result: [[1, 1126]],
@@ -258,6 +298,12 @@ export const dspCrafts: Craft[] = [
       [2, 1106],
     ],
   },
+  {
+    result: [[1, 1112]],
+    type: "smelter",
+    time: 2,
+    requirements: [[1, 1109]],
+  },
   // Organic Crystal
   {
     result: [[1, 1117]],
@@ -277,6 +323,41 @@ export const dspCrafts: Craft[] = [
       [20, 1030],
       [30, 1031],
       [10, 1000],
+    ],
+  },
+  // Super-magnetic ring
+  {
+    result: [[1, 1205]],
+    type: "assembler",
+    time: 3,
+    requirements: [
+      [2, 1204],
+      [3, 1102],
+      [1, 1109],
+    ],
+  },
+  // Frame material
+  {
+    result: [[1, 1125]],
+    type: "assembler",
+    time: 6,
+    requirements: [
+      [4, 1124],
+      [1, 1107],
+      [1, 1105],
+    ],
+  },
+  // Miniature particle collider
+  {
+    result: [[1, 2310]],
+    type: "assembler",
+    time: 15,
+    requirements: [
+      [20, 1107],
+      [20, 1125],
+      [50, 1205],
+      [10, 1123],
+      [8, 1303],
     ],
   },
   // Gravity Matrix
@@ -329,6 +410,11 @@ export const dspItems: Item[] = [
     icon: "https://dsp-wiki.com/images/5/5a/Icon_Stone.png",
   },
   {
+    id: 1006,
+    name: "Coal",
+    icon: "https://dsp-wiki.com/images/a/a2/Icon_Coal.png",
+  },
+  {
     id: 1007,
     name: "Crude Oil",
     icon: "https://dsp-wiki.com/images/8/8f/Icon_Crude_Oil.png",
@@ -347,6 +433,11 @@ export const dspItems: Item[] = [
     id: 1102,
     name: "Magnet",
     icon: "https://dsp-wiki.com/images/c/c6/Icon_Magnet.png",
+  },
+  {
+    id: 1103,
+    name: "Steel",
+    icon: "https://dsp-wiki.com/images/3/38/Icon_Steel.png",
   },
   {
     id: 1104,
@@ -372,6 +463,11 @@ export const dspItems: Item[] = [
     id: 1106,
     name: "Titanium Ingot",
     icon: "https://dsp-wiki.com/images/f/f1/Icon_Titanium_Ingot.png",
+  },
+  {
+    id: 1107,
+    name: "Titanium alloy",
+    icon: "https://dsp-wiki.com/images/8/85/Icon_Titanium_Alloy.png",
   },
   {
     id: 1110,
@@ -402,6 +498,11 @@ export const dspItems: Item[] = [
     id: 1117,
     name: "Organic Crystal",
     icon: "https://dsp-wiki.com/images/9/96/Icon_Organic_Crystal.png",
+  },
+  {
+    id: 1125,
+    name: "Frame material",
+    icon: "https://dsp-wiki.com/images/9/9d/Icon_Frame_Material.png",
   },
   {
     id: 1030,
@@ -473,6 +574,13 @@ export const dspItems: Item[] = [
     name: "Electromagnetic turbine",
     icon: "https://dsp-wiki.com/images/5/53/Icon_Electromagnetic_Turbine.png",
   },
+
+  {
+    id: 1205,
+    name: "Super-magnetic ring",
+    icon: "https://dsp-wiki.com/images/b/b4/Icon_Super-Magnetic_Ring.png",
+  },
+
   {
     id: 1206,
     name: "Particle Container",
@@ -519,6 +627,11 @@ export const dspItems: Item[] = [
     icon: "https://dsp-wiki.com/images/b/b6/Icon_Particle_Broadband.png",
   },
   {
+    id: 2310,
+    name: "Miniature particle collider",
+    icon: "https://dsp-wiki.com/images/a/aa/Icon_Miniature_Particle_Collider.png",
+  },
+  {
     id: 6005,
     name: "Gravity Matrix",
     icon: "https://dsp-wiki.com/images/4/47/Icon_Gravity_Matrix.png",
@@ -534,10 +647,10 @@ export const findIcon = (findId: number) =>
 export const calculateRequirements = ([requestedAmount, requestedItemId]: [
   number,
   number
-]): Array<CraftTree> => {
+]): Array<Recipe> => {
   // look up all crafts that create this item
 
-  const crafts = dspCrafts.filter(({ result }) => {
+  const recipes = dspRecipes.filter(({ result }) => {
     return (
       result.filter(([_, id]) => {
         return id === requestedItemId;
@@ -545,8 +658,8 @@ export const calculateRequirements = ([requestedAmount, requestedItemId]: [
     );
   });
 
-  if (crafts.length === 0) {
-    console.log("no crafts for " + findName(requestedItemId));
+  if (recipes.length === 0) {
+    console.log("no recipes for " + findName(requestedItemId));
     // FIXME Assuming if there are no crafts that we can source the material via the miner
     return [
       {
@@ -558,12 +671,15 @@ export const calculateRequirements = ([requestedAmount, requestedItemId]: [
     ];
   }
 
-  return crafts.map((craft) => {
-    console.log(craft.requirements);
+  return recipes.map((recipe) => {
+    // requested requirements
+    console.log(requestedAmount, requestedItemId);
+
     return {
-      ...craft,
-      requirements: craft.requirements.flatMap(
-        ([requirementAmount, requirementItemId]) => {
+      ...recipe,
+
+      producers: recipe.requirements.flatMap(
+        ([requirementAmount, requirementItemId], i) => {
           return calculateRequirements([requirementAmount, requirementItemId]);
         }
       ),

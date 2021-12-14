@@ -1,4 +1,4 @@
-import { calculateRequirements, dspCrafts, dspItems } from "./data";
+import { calculateRequirements, dspRecipes, dspItems } from "./data";
 
 test("calculations", () => {
   expect(dspItems).toBe("red");
