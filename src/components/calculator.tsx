@@ -9,6 +9,9 @@ import {
   Recipe,
 } from "../data";
 import Recipes from "./Recipes";
+import Tippy from "@tippyjs/react";
+
+import "style-loader!css-loader!tippy.js/dist/tippy.css";
 
 const onChange: (
   setFunction: (value: string | undefined) => void
@@ -22,76 +25,62 @@ const forLink = (str: string) => {
 
 const Item = ({ item, amount }: { item: number; amount: number }) => {
   return (
-    <div>
-      {amount} {findName(item)}{" "}
-      <img src={findIcon(item)} alt={findName(item)} width={22} />
+    <div className="item-result">
+      <div className="item-result-item">
+        <div className="item-amount">{amount}</div>
+        <div className="item-icon">
+          <img src={findIcon(item)} alt={findName(item)} width={22} />
+        </div>
+        <div className="item-name">{findName(item)}</div>
+      </div>
       <div>
-        <div>
-          {calculateRequirements([amount, item]).map((recipe) => {
-            return (
-              <div>
-								<div className="time">{recipe.time} &lt;--</div>
+        {calculateRequirements([amount, item]).map((recipe) => {
+          return (
+            <div className="production">
+              <div className="time">{recipe.time}s </div>
+              <div className="item-requirements">
                 <div className="requirements">
-                  <div>Requirements</div>
-                  <div>
-                    {recipe.requirements.map(([amt, id]) => {
-                      return (
-                        <div>
-                          {amt} {findName(id)}{" "}
+                  {recipe.requirements.map(([amt, id]) => {
+                    return (
+                      <div className="item">
+                        <div>{amt}</div>
+                        <Tippy content={`${findName(id)}`}>
                           <img
                             src={findIcon(id)}
                             alt={findName(id)}
-                            width={22}
+                            width={28}
                           />
+                        </Tippy>
+                      </div>
+                    );
+                  })}
+                </div>
+                <details className="producers" key={recipe.result[0][1]}>
+                  <summary>Producers</summary>
+                  <div>
+                    {recipe.producers?.map((r) => {
+                      return (
+                        <div>
+                          <div>
+                            {r.result.map(([a, i]) => {
+                              return <Item item={i} amount={a} />;
+                              // return (
+                              //   <div>
+                              //     {a} {findName(i)}
+                              //     <img src={findIcon(i)} alt={findName(i)} width={22} />
+                              //   </div>
+                              // );
+                            })}{" "}
+                          </div>{" "}
                         </div>
                       );
                     })}
                   </div>
-                  <details className="producers" key={recipe.result[0][1]}>
-                    <summary>Producers</summary>
-                    <div>
-                      {recipe.producers?.map((r) => {
-                        return (
-                          <div>
-                            <div>
-                              {r.result.map(([a, i]) => {
-                                return <Item item={i} amount={a} />;
-                                // return (
-                                //   <div>
-                                //     {a} {findName(i)}
-                                //     <img src={findIcon(i)} alt={findName(i)} width={22} />
-                                //   </div>
-                                // );
-                              })}{" "}
-                            </div>{" "}
-                            <div>{r.time}s</div>
-                            <div>
-                              {r.producers?.map((producer) => {
-                                return (
-                                  <div>
-                                    {producer.type}{" "}
-																		{producer.time}
-                                    {producer.result.map(([a, i]) => {
-                                      return (
-                                        <div>
-                                          {a} {findName(i)}
-                                        </div>
-                                      );
-                                    })}
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </details>
-                </div>
+                </details>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -164,9 +153,8 @@ const Calculator: React.FunctionComponent = () => {
 
   return (
     <div>
-      <h1>Dyson Sphere Program Perfect Calculator</h1>
-      <form>
-        <section style={{ display: "grid" }}>
+      <h1>Dyson Sphere Program Perfect Calculator</h1> <form>
+        <section style={{ display: "grid", justifyContent: "center" }}>
           <label htmlFor="amount">Amount per second</label>
           <input
             id="amount"
@@ -176,7 +164,7 @@ const Calculator: React.FunctionComponent = () => {
             placeholder="amount per second"
             onChange={onChange(setAmount)}
           />
-          <div>
+          <div className="calculator-options">
             <div>
               Selected: <img src={item?.icon} alt={item?.name} width={44} />
             </div>
@@ -184,7 +172,6 @@ const Calculator: React.FunctionComponent = () => {
             <div
               className="items"
               style={{
-                maxWidth: "640px",
                 padding: "16px",
                 display: "grid",
                 gridGap: "16px",
@@ -198,7 +185,9 @@ const Calculator: React.FunctionComponent = () => {
                   onClick={() => selectItem(item)}
                   style={{ cursor: "pointer" }}
                 >
-                  <img src={item.icon} width={44} alt={item.name} />
+                  <Tippy content={item.name}>
+                    <img src={item.icon} width={44} alt={item.name} />
+                  </Tippy>
                 </div>
               ))}
             </div>

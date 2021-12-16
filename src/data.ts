@@ -4,7 +4,14 @@
  */
 export type Recipe = {
   result: [number, number][];
-  type: "assembler" | "smelter" | "collider" | "refiner" | "chemical" | "miner";
+  type:
+    | "assembler"
+    | "smelter"
+    | "collider"
+    | "refiner"
+    | "chemical"
+    | "miner"
+    | "exchanger";
   time: number;
   producers?: Recipe[];
   requirements: [number, number][];
@@ -12,7 +19,14 @@ export type Recipe = {
 
 export type RecipeTree = {
   result: [number, number][];
-  type: "assembler" | "smelter" | "collider" | "refiner" | "chemical" | "miner";
+  type:
+    | "assembler"
+    | "smelter"
+    | "collider"
+    | "refiner"
+    | "chemical"
+    | "miner"
+    | "exchanger";
   time: number;
   requirements: RecipeTree[];
 };
@@ -88,6 +102,18 @@ export const dspRecipes: Recipe[] = [
     requirements: [
       [2, 1203],
       [2, 1202],
+    ],
+  },
+  // Energy Exchanger
+  {
+    result: [[1, 2209]],
+    type: "assembler",
+    time: 15,
+    requirements: [
+      [40, 1107],
+      [40, 1103],
+      [40, 1303],
+      [8, 1206],
     ],
   },
   // Electric Motor
@@ -239,6 +265,70 @@ export const dspRecipes: Recipe[] = [
       [2, 1106],
       [2, 1000],
     ],
+  },
+  // Reinforced Thruster
+  {
+    result: [[1, 1406]],
+    type: "assembler",
+    time: 6,
+    requirements: [
+      [5, 1107],
+      [5, 1204],
+    ],
+  },
+
+  // Planetary Logistics Station
+  {
+    result: [[1, 2103]],
+    type: "assembler",
+    time: 30,
+    requirements: [
+      [40, 1103],
+      [40, 1106],
+      [40, 1303],
+      [20, 1206],
+    ],
+  },
+  // Interstellar Logistics Station
+  {
+    result: [[1, 2104]],
+    type: "assembler",
+    time: 30,
+    requirements: [
+      [1, 2103],
+      [50, 1107],
+      [20, 1206],
+    ],
+  },
+  // Orbital Collector
+  {
+    result: [[1, 2105]],
+    type: "assembler",
+    time: 30,
+    requirements: [
+      [1, 2104],
+      [50, 1205],
+      [20, 1406],
+      [20, 2207],
+    ],
+  },
+  // Accumulator
+  {
+    result: [[1, 2206]],
+    type: "assembler",
+    time: 5,
+    requirements: [
+      [5, 1105],
+      [1, 1205],
+      [6, 1113],
+    ],
+  },
+  // Accumulator(full)
+  {
+    result: [[1, 2207]],
+    type: "exchanger",
+    time: 2,
+    requirements: [[1, 2206]],
   },
   // Plastic
   {
@@ -627,6 +717,41 @@ export const dspItems: Item[] = [
     icon: "https://dsp-wiki.com/images/b/b6/Icon_Particle_Broadband.png",
   },
   {
+    id: 1406,
+    name: "Reinforced thruster",
+    icon: "https://dsp-wiki.com/images/3/3d/Icon_Reinforced_Thruster.png",
+  },
+  {
+    id: 2103,
+    name: "Planetary Logistics Station",
+    icon: "https://dsp-wiki.com/images/e/e5/Icon_Planetary_Logistics_Station.png",
+  },
+  {
+    id: 2104,
+    name: "Interstellar Logistics Station",
+    icon: "https://dsp-wiki.com/images/6/6c/Icon_Interstellar_Logistics_Station.png",
+  },
+  {
+    id: 2105,
+    name: "Orbital Collector",
+    icon: "https://dsp-wiki.com/images/6/64/Icon_Orbital_Collector.png",
+  },
+  {
+    id: 2206,
+    name: "Accumulator",
+    icon: "https://dsp-wiki.com/images/7/71/Icon_Accumulator.png",
+  },
+  {
+    id: 2207,
+    name: "Accumulator(full)",
+    icon: "https://dsp-wiki.com/images/6/67/Icon_Full_Accumulator.png",
+  },
+  {
+    id: 2209,
+    name: "Energy exchanger",
+    icon: "https://dsp-wiki.com/images/6/64/Icon_Energy_Exchanger.png",
+  },
+  {
     id: 2310,
     name: "Miniature particle collider",
     icon: "https://dsp-wiki.com/images/a/aa/Icon_Miniature_Particle_Collider.png",
@@ -673,7 +798,7 @@ export const calculateRequirements = ([requestedAmount, requestedItemId]: [
 
   return recipes.map((recipe) => {
     // requested requirements
-    console.log(requestedAmount, requestedItemId);
+    // console.log(requestedAmount, requestedItemId);
 
     return {
       ...recipe,

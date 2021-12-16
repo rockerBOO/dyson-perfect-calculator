@@ -1,8 +1,7 @@
 {
 	"type": "module",
 	"dependencies": {
-		"@types/react": "^17.0.37",
-		"normalize.css": "^8.0.1",
+		"@tippyjs/react": "^4.2.6",
 		"prop-types": "^15.7.2",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
@@ -14,10 +13,12 @@
 	"devDependencies": {
 		"@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
 		"@types/jest": "^27.0.3",
+		"@types/prettier": "^2",
+		"@types/react": "^17.0.37",
 		"@types/react-dom": "^17.0.11",
 		"@types/react-is": "^17",
 		"cross-env": "^7.0.3",
-		"css-loader": "^5.2.7",
+		"css-loader": "^6.5.1",
 		"eslint": "^8.4.1",
 		"eslint-plugin-compat": "^4.0.0",
 		"eslint-plugin-react": "^7.26.1",
@@ -26,6 +27,8 @@
 		"fork-ts-checker-webpack-plugin": "^6.5.0",
 		"html-webpack-plugin": "^5.5.0",
 		"jest": "^27.4.4",
+		"normalize.css": "^8.0.1",
+		"prettier": "^2.5.1",
 		"react-refresh": "^0.11.0",
 		"react-refresh-typescript": "^2.0.3",
 		"style-loader": "^2.0.0",

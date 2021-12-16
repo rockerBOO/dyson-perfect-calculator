@@ -1,0 +1,92 @@
+body {
+  font-size: 12px;
+	background-color: #0f1f34;
+	color: white;
+	font-family: Inter V;
+	font-weight: 900;
+}
+
+.recipe {
+  display: grid;
+  padding: 8px;
+  grid-template-columns: 3fr 1fr 11fr;
+}
+
+.time {
+  display: grid;
+  justify-content: center;
+  background: #2cdd61;
+	color: black;
+  padding: 8px;
+	font-size: 1.2em;
+}
+
+.time-amount {
+  align-self: flex-end;
+}
+
+.result {
+  display: grid;
+  grid-template-columns: 1em 1.5em auto;
+  grid-gap: 8px;
+}
+
+.results {
+  background: red;
+  padding: 8px;
+}
+
+.requirement {
+}
+
+
+.producers {
+  padding: 8px;
+  background-color: #0080623d;
+}
+
+.producers summary {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.items img {
+	height: auto;	
+}
+
+.item-result {
+	max-width: 400px;
+	display: grid;
+}
+
+.item-result-item {
+	padding: 8px;
+	display: grid;
+	grid-template-columns: 2em 4em auto;
+	align-items: center;
+	font-size: 1rem;
+}
+
+.item-icon img {
+	width: 3rem;
+}
+
+
+.production {
+	max-width: 400px;
+}
+
+.requirements {
+  padding: 8px;
+  background-color: #7400ff1a;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+	max-width: 400px;
+}
+
+.item {
+	padding: 8px;
+	display: grid;
+	grid-template-columns: 2em auto;
+	align-items: center;
+}
