@@ -10,11 +10,11 @@ body {
   padding: 16px;
 }
 
-.recipe {
-  display: grid;
-  padding: 8px;
-  grid-template-columns: 3fr 1fr 11fr;
-}
+/* .recipe { */
+/*   display: grid; */
+/*   padding: 8px; */
+/*   grid-template-columns: 3fr 1fr 11fr; */
+/* } */
 
 .time {
   display: grid;
@@ -160,7 +160,7 @@ body {
 	padding: 8px;
   display: grid;
   align-items: center;
-  grid-template-columns: 2em 4em;
+  grid-template-columns: 2em 5em;
 }
 
 .item-icon img {

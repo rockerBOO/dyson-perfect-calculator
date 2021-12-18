@@ -767,7 +767,17 @@ export const findName = (findId: number) =>
   dspItems.filter(({ id }) => id == findId).reduce((_, { name }) => name, "");
 
 export const findIcon = (findId: number) =>
-  dspItems.filter(({ id }) => id == findId).reduce((_, { icon }) => icon, "");
+  dspItems
+    .filter(({ id }) => id == findId)
+    .reduce((_, { icon }) => convertIconWikiIconToLocal(icon), "");
+
+export const convertIconWikiIconToLocal = (icon: string): string => {
+  const url = new URL(icon);
+  const pathname = url.pathname;
+  const filename = pathname.substring(pathname.lastIndexOf("/") + 1);
+
+  return `/assets/img/${filename}`;
+};
 
 export const calculateRequirements = ([requestedAmount, requestedItemId]: [
   number,

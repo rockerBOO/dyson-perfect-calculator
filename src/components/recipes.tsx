@@ -1,26 +1,26 @@
 import Tippy from "@tippyjs/react";
 import { findIcon, findName, dspRecipes } from "../data";
 import Item, { ItemBlock } from "./item";
+import styled from "styled-components";
+
+const List = styled.div`
+  display: grid;
+  gridgap: 16px;
+  gridtemplatecolumns: repeat(auto-fit, minmax(360px, 1fr));
+`;
+
+const Recipe = styled.div`
+  backgroundcolor: hsla(170, 20%, 20%, 0.05);
+`;
 
 const Recipes = () => {
   return (
     <div>
       <h2>Recipes</h2>
-      <div
-        style={{
-          padding: "16px",
-          display: "grid",
-          gridGap: "16px",
-          gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr)",
-        }}
-      >
+      <List>
         {dspRecipes.map((craft) => {
           return (
-            <div
-              style={{
-                backgroundColor: "hsla(170, 20%, 20%, .05)",
-              }}
-            >
+            <Recipe className="recipe">
               <div className="results">
                 {craft.result.map(([amount, itemId]) => {
                   return <ItemBlock amount={amount} item={itemId} />;
@@ -34,10 +34,10 @@ const Recipes = () => {
                   <ItemBlock item={item} amount={amount} />
                 ))}
               </div>
-            </div>
+            </Recipe>
           );
         })}
-      </div>
+      </List>
     </div>
   );
 };

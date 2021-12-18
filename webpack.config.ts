@@ -3,9 +3,13 @@ import HtmlPlugin from "html-webpack-plugin";
 import WebpackModules from "webpack-modules";
 import TerserPlugin from "terser-webpack-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
+import GenerateJsonPlugin from "generate-json-webpack-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
+import CopyPlugin from "copy-webpack-plugin";
 import webpack from "webpack";
 import ForkTsCheckerPlugin from "fork-ts-checker-webpack-plugin";
+import items from "./src/dsp-items";
+import recipes from "./src/dsp-recipes";
 
 const webpackConfig = (env) => {
   const isDevelopment = env !== "production";
@@ -52,6 +56,11 @@ const webpackConfig = (env) => {
       isDevelopment && new ReactRefreshWebpackPlugin(),
       isDevelopment && new webpack.HotModuleReplacementPlugin(),
       new ForkTsCheckerPlugin(),
+      new CopyPlugin({
+        patterns: [{ from: "src/img", to: "assets/img" }],
+      }),
+      new GenerateJsonPlugin("dsp-items.json", items),
+      new GenerateJsonPlugin("dsp-recipes.json", recipes),
     ].filter(Boolean),
     optimization: {
       minimizer: [

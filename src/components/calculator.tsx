@@ -62,7 +62,7 @@ window.scrollTo(0, 0)
                   style={{ cursor: "pointer" }}
                 >
                   <Tippy content={item.name}>
-                    <img src={item.icon} width={44} alt={item.name} />
+                    <img src={findIcon(item.id)} width={44} alt={item.name} />
                   </Tippy>
                 </div>
               ))}
