@@ -11,7 +11,7 @@ const Recipes = () => {
           padding: "16px",
           display: "grid",
           gridGap: "16px",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr)",
+          gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr)",
         }}
       >
         {dspRecipes.map((craft) => {
@@ -19,7 +19,6 @@ const Recipes = () => {
             <div
               style={{
                 backgroundColor: "hsla(170, 20%, 20%, .05)",
-                padding: 16,
               }}
             >
               <div className="results">

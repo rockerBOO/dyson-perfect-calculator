@@ -55,7 +55,10 @@ const Calculator: React.FunctionComponent = () => {
                 <div
 									className="item-icon"
                   key={item.name}
-                  onClick={() => selectItem(item)}
+									onClick={() => {
+										selectItem(item)
+window.scrollTo(0, 0)
+									}}
                   style={{ cursor: "pointer" }}
                 >
                   <Tippy content={item.name}>

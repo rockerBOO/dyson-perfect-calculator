@@ -9,6 +9,7 @@ export const ItemBlock = ({ amount, item }) => (
         <Tippy content={findName(item)}>
           <img src={findIcon(item)} alt={findName(item)} width={22} />
         </Tippy>
+				<div className="item-name">{findName(item)}</div>
       </div>
     </div>
   </div>
