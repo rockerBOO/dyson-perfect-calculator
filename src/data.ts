@@ -462,13 +462,13 @@ export const dspRecipes: Recipe[] = [
   },
 ];
 
-export type Item = {
+export type DSPItem = {
   id: number;
   name: string;
   icon: string;
 };
 
-export const dspItems: Item[] = [
+export const dspItems: DSPItem[] = [
   {
     id: 1000,
     name: "Water",
