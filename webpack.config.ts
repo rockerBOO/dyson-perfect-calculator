@@ -11,15 +11,14 @@ import ForkTsCheckerPlugin from "fork-ts-checker-webpack-plugin";
 import items from "./src/dsp-items";
 import recipes from "./src/dsp-recipes";
 
-const webpackConfig = (env) => {
-  const isDevelopment = env !== "production";
+const webpackConfig = (env, args) => {
+  const isDevelopment = args.mode !== 'production';
 
   return {
     mode: env === "production" ? "production" : "development",
     devtool: env === "production" ? "cheap-source-maps" : "eval",
     entry: {
       main: "./src/index.tsx",
-      workbox: "./src/workbox.js",
     },
     module: {
       rules: [
