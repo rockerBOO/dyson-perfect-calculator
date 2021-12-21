@@ -5,12 +5,12 @@ import styled from "styled-components";
 
 const List = styled.div`
   display: grid;
-  gridgap: 16px;
-  gridtemplatecolumns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 `;
 
 const Recipe = styled.div`
-  backgroundcolor: hsla(170, 20%, 20%, 0.05);
+  background-color: hsla(170, 20%, 20%, 0.05);
 `;
 
 const Recipes = () => {
@@ -18,12 +18,12 @@ const Recipes = () => {
     <div>
       <h2>Recipes</h2>
       <List>
-        {dspRecipes.map((craft) => {
+        {dspRecipes.map((craft, i) => {
           return (
-            <Recipe className="recipe">
+            <Recipe key={craft.type + i} className="recipe">
               <div className="results">
                 {craft.result.map(([amount, itemId]) => {
-                  return <ItemBlock amount={amount} item={itemId} />;
+                  return <ItemBlock key={itemId} amount={amount} item={itemId} />;
                 })}
               </div>
 
@@ -31,7 +31,7 @@ const Recipes = () => {
               <div className="time">{craft.time}s</div>
               <div className="requirements">
                 {craft.requirements.map(([amount, item]) => (
-                  <ItemBlock item={item} amount={amount} />
+                  <ItemBlock key={item} item={item} amount={amount} />
                 ))}
               </div>
             </Recipe>

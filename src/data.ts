@@ -74,6 +74,23 @@ export const dspRecipes: Recipe[] = [
     time: 4,
     requirements: [[2, 1007]],
   },
+  // Foundation
+  {
+    result: [[1, 1131]],
+    type: "smelter",
+    time: 1,
+    requirements: [
+      [3, 1108],
+      [1, 1103],
+    ],
+  },
+  // Stone brick
+  {
+    result: [[1, 1108]],
+    type: "smelter",
+    time: 1,
+    requirements: [[1, 1005]],
+  },
   // Particle Container
   {
     result: [[1, 1206]],
@@ -252,7 +269,7 @@ export const dspRecipes: Recipe[] = [
     time: 12,
     requirements: [
       [1, 1126],
-      [2, 1118],
+      [2, 1119],
     ],
   },
   // Titanium Glass
@@ -318,7 +335,7 @@ export const dspRecipes: Recipe[] = [
     type: "assembler",
     time: 5,
     requirements: [
-      [5, 1105],
+      [5, 1101],
       [1, 1205],
       [6, 1113],
     ],
@@ -337,7 +354,7 @@ export const dspRecipes: Recipe[] = [
     time: 3,
     requirements: [
       [2, 1114],
-      [1, 1106],
+      [1, 1109],
     ],
   },
   // Energetic graphite
@@ -540,6 +557,11 @@ export const dspItems: DSPItem[] = [
     icon: "https://dsp-wiki.com/images/8/8a/Icon_High-Purity_Silicon.png",
   },
   {
+    id: 1108,
+    name: "Stone brick",
+    icon: "https://dsp-wiki.com/images/6/61/Icon_Stone_Brick.png",
+  },
+  {
     id: 1109,
     name: "Energetic graphite",
     icon: "https://dsp-wiki.com/images/1/11/Icon_Energetic_Graphite.png",
@@ -643,6 +665,11 @@ export const dspItems: DSPItem[] = [
     id: 1127,
     name: "Strange Matter",
     icon: "https://dsp-wiki.com/images/8/8f/Icon_Strange_Matter.png",
+  },
+  {
+    id: 1131,
+    name: "Foundation",
+    icon: "https://dsp-wiki.com/images/6/60/Icon_Foundation.png",
   },
   {
     id: 1201,

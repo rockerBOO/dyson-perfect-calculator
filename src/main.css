@@ -77,6 +77,10 @@ body {
   padding: 8px;
 }
 
+.item-amount {
+	justify-self:center;
+}
+
 .item-selector {
   width: 100%;
   display: "grid";

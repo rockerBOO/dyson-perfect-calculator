@@ -1,28 +1,40 @@
 import Tippy from "@tippyjs/react";
 import { calculateRequirements, findIcon, findName } from "../data";
 
-export const ItemBlock = ({ amount, item }) => (
-  <div className="item-result-item">
-    <div className="item-result-item-block">
-      <div className="item-amount">{amount}</div>
-      <div className="item-icon">
-        <Tippy content={findName(item)}>
-          <img src={findIcon(item)} alt={findName(item)} width={22} />
-        </Tippy>
-				<div className="item-name">{findName(item)}</div>
+export const ItemBlock = ({
+  amount,
+  item,
+}: {
+  amount: number;
+  item: number;
+}) => {
+  return (
+    <div className="item-result-item">
+      <div className="item-result-item-block">
+        <div className="item-amount">{amount}</div>
+        <div className="item-icon">
+          <Tippy content={findName(item)}>
+            <img src={findIcon(item)} alt={findName(item)} width={22} />
+          </Tippy>
+          <div className="item-name">{findName(item)}</div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const Item = ({ item, amount }: { item: number; amount: number }) => {
+const Item = ({ item, amount }: { item: number; amount?: number }) => {
   return (
     <div className="item-result">
-      <ItemBlock item={item} amount={amount} />
       <div>
-        {calculateRequirements([amount, item]).map((recipe) => {
+        {calculateRequirements([amount ?? 1, item]).map((recipe) => {
           return (
             <div className="production">
+              <div className="results">
+                {recipe.result.map(([amt, itemid]) => {
+                  return <ItemBlock item={item} amount={amt} />;
+                })}
+              </div>
               <div className="craft-type">{recipe.type}</div>
               <div className="time">{recipe.time}s </div>
               <div className="item-requirements">

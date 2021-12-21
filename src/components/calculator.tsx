@@ -32,23 +32,20 @@ const Calculator: React.FunctionComponent = () => {
       </div>
       <form>
         <section className="item-selector" style={{}}>
-          <div className="calculations">
-            <label htmlFor="amount">Amount per second</label>
-            <input
-              id="amount"
-              type="text"
-              name="amount"
-              value={amount}
-              placeholder="amount per second"
-              onChange={onChange(setAmount)}
-            />
-          </div>
+          {/* <div className="calculations"> */}
+          {/*   <label htmlFor="amount">Amount per second</label> */}
+          {/*   <input */}
+          {/*     id="amount" */}
+          {/*     type="text" */}
+          {/*     name="amount" */}
+          {/*     value={amount} */}
+          {/*     placeholder="amount per second" */}
+          {/*     onChange={onChange(setAmount)} */}
+          {/*   /> */}
+          {/* </div> */}
           <div className="calculator-options">
-            <div className="selected-option">
-              Selected: <img src={item?.icon} alt={item?.name} width={44} />
-            </div>
             <div className="selected-option-item">
-              {item ? <Item item={item.id} amount={1} /> : <></>}
+              {item ? <Item key={item.id} item={item.id} /> : <></>}
             </div>
             <div className="items">
               {dspItems.map((item) => (
