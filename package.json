@@ -59,7 +59,7 @@
 	},
 	"name": "react-starter",
 	"packageManager": "yarn@3.1.1",
-  "engines" : { 
+	"engines": {
 		"node": ">=16.0.0"
 	}
 }
