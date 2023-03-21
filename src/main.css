@@ -53,11 +53,11 @@ body {
 .craft-type {
   background-color: #0080623d;
   padding: 8px;
-	display: grid;
-	align-items: center;
-	grid-auto-flow: column;
-	justify-content: center;
-	grid-gap: 4px;
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+  justify-content: center;
+  grid-gap: 4px;
 }
 
 .producers {
@@ -155,7 +155,7 @@ body {
   font-size: 1rem;
   justify-content: center;
   min-height: 5em;
-	line-height: 1;
+  line-height: 1;
 }
 
 .item-result-item-block {

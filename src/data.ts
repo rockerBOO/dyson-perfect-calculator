@@ -617,7 +617,7 @@ export const dspRecipes: Recipe[] = [
       [1, 1123],
     ],
   },
-	// "Miniature Particle Collider"
+  // "Miniature Particle Collider"
   {
     result: [[1, 2310]],
     type: "assembler",

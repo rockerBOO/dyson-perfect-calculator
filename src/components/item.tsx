@@ -46,7 +46,12 @@ export const ItemBlock = ({
             onMount={onMount}
             onHide={onHide}
           >
-						<img src={findIcon(item)} alt={findName(item)} width={44} style={{maxWidth: 44}} />
+            <img
+              src={findIcon(item)}
+              alt={findName(item)}
+              width={44}
+              style={{ maxWidth: 44 }}
+            />
           </Tippy>
           <div className="item-name">{findName(item)}</div>
         </div>

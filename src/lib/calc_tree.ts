@@ -39,10 +39,12 @@ export const calcTree = (input = [{ id: 4, time: 1, needs: 10 }]) => {
 
           return { id, time, needs: needs * (amount / time) };
         }),
-        calcTree(recipe.requirements.map((req) => {
-          console.log("requiurements", id, needs, req[0], time);
-          return { id: req[1], time, needs: needs * (req[0] / time) };
-        })),
+        calcTree(
+          recipe.requirements.map((req) => {
+            console.log("requiurements", id, needs, req[0], time);
+            return { id: req[1], time, needs: needs * (req[0] / time) };
+          })
+        ),
       ];
     });
   });
