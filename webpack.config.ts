@@ -1,18 +1,17 @@
-/* eslint-env node */
-import HtmlPlugin from "html-webpack-plugin";
-import WebpackModules from "webpack-modules";
-import TerserPlugin from "terser-webpack-plugin";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
-import GenerateJsonPlugin from "generate-json-webpack-plugin";
-import ReactRefreshTypeScript from "react-refresh-typescript";
 import CopyPlugin from "copy-webpack-plugin";
-import webpack from "webpack";
 import ForkTsCheckerPlugin from "fork-ts-checker-webpack-plugin";
+import GenerateJsonPlugin from "generate-json-webpack-plugin";
+import HtmlPlugin from "html-webpack-plugin";
+import ReactRefreshTypeScript from "react-refresh-typescript";
+import TerserPlugin from "terser-webpack-plugin";
+import webpack from "webpack";
+import WebpackModules from "webpack-modules";
 import items from "./src/dsp-items";
 import recipes from "./src/dsp-recipes";
 
 const webpackConfig = (env, args) => {
-  const isDevelopment = args.mode !== 'production';
+  const isDevelopment = args.mode !== "production";
 
   return {
     mode: env === "production" ? "production" : "development",

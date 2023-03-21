@@ -3,32 +3,58 @@
  * @param requirements [number, number][]: tuple of amount and item id; example [1, 1022]
  */
 export type Recipe = {
+  /**
+   * what the result of the recipe is
+   */
   result: [number, number][];
-  type:
-    | "assembler"
-    | "smelter"
-    | "collider"
-    | "refiner"
-    | "chemical"
-    | "miner"
-    | "exchanger";
+  type: RecipeType;
   time: number;
   producers?: Recipe[];
+  /**
+   * items required for the recipe
+   * [number of items, id of item]
+   * Ex: [3, 1402]
+   */
   requirements: [number, number][];
 };
+export type RecipeType =
+  | "assembler"
+  | "smelter"
+  | "collider"
+  | "refiner"
+  | "chemical"
+  | "miner"
+  | "exchanger";
 
 export type RecipeTree = {
   result: [number, number][];
-  type:
-    | "assembler"
-    | "smelter"
-    | "collider"
-    | "refiner"
-    | "chemical"
-    | "miner"
-    | "exchanger";
+  type: RecipeType;
   time: number;
   requirements: RecipeTree[];
+};
+
+/**
+ * convert assembler to [2303] so you can get an icon for the type
+ */
+export const typeToItems = (type: RecipeType): number[] => {
+  switch (type) {
+    case "assembler":
+      return [2303];
+    case "smelter":
+      return [2302];
+    case "refiner":
+      return [2308];
+    case "chemical":
+      return [2309];
+    case "miner":
+      return [2301];
+    case "exchanger":
+      return [2209];
+    case "collider":
+      return [2310];
+    default:
+      return [];
+  }
 };
 
 export const dspRecipes: Recipe[] = [
@@ -477,6 +503,133 @@ export const dspRecipes: Recipe[] = [
       [1, 1305],
     ],
   },
+  // Proliferator Mk.I
+  {
+    result: [[1, 1141]],
+    type: "assembler",
+    time: 0.5,
+    requirements: [[1, 1006]],
+  },
+  // Proliferator Mk.II
+  {
+    result: [[1, 1142]],
+    type: "assembler",
+    time: 1,
+    requirements: [
+      [2, 1141],
+      [1, 1112],
+    ],
+  },
+  // Proliferator Mk.III
+  {
+    result: [[1, 1143]],
+    type: "assembler",
+    time: 2,
+    requirements: [
+      [2, 1142],
+      [1, 1124],
+    ],
+  },
+  // Spray coater
+  {
+    result: [[1, 2313]],
+    type: "assembler",
+    time: 3,
+    requirements: [
+      [4, 1103],
+      [2, 1401],
+      [2, 1301],
+      [2, 1302],
+    ],
+  },
+  // Arc Smelter
+  {
+    result: [[1, 2302]],
+    type: "assembler",
+    time: 3,
+    requirements: [
+      [4, 1101],
+      [2, 1108],
+      [4, 1301],
+      [2, 1202],
+    ],
+  },
+  // Wind turbine
+  {
+    result: [[1, 2203]],
+    type: "assembler",
+    time: 4,
+    requirements: [
+      [6, 1101],
+      [1, 1108],
+      [3, 1202],
+    ],
+  },
+  // Assembler
+  {
+    result: [[1, 2303]],
+    type: "assembler",
+    time: 2,
+    requirements: [
+      [4, 1101],
+      [8, 1201],
+      [4, 1301],
+    ],
+  },
+  // Tesla Tower
+  {
+    result: [[1, 2201]],
+    type: "assembler",
+    time: 1,
+    requirements: [
+      [2, 1101],
+      [1, 1202],
+    ],
+  },
+  // Conveyor belt MK.I
+  {
+    result: [[3, 2001]],
+    type: "assembler",
+    time: 1,
+    requirements: [
+      [2, 1101],
+      [1, 1201],
+    ],
+  },
+  // Conveyor belt MK.II
+  {
+    result: [[3, 2002]],
+    type: "assembler",
+    time: 1,
+    requirements: [
+      [3, 2001],
+      [1, 1204],
+    ],
+  },
+  // Conveyor belt MK.III
+  {
+    result: [[3, 2003]],
+    type: "assembler",
+    time: 1,
+    requirements: [
+      [3, 2002],
+      [1, 1205],
+      [1, 1123],
+    ],
+  },
+	// "Miniature Particle Collider"
+  {
+    result: [[1, 2310]],
+    type: "assembler",
+    time: 15,
+    requirements: [
+      [20, 1107],
+      [20, 1125],
+      [25, 1205],
+      [10, 1123],
+      [8, 1303],
+    ],
+  },
 ];
 
 export type DSPItem = {
@@ -672,6 +825,21 @@ export const dspItems: DSPItem[] = [
     icon: "https://dsp-wiki.com/images/6/60/Icon_Foundation.png",
   },
   {
+    id: 1141,
+    name: "Proliferator MK.I",
+    icon: "https://dsp-wiki.com/images/e/ec/Icon_Proliferator_Mk.I.png",
+  },
+  {
+    id: 1142,
+    name: "Proliferator MK.II",
+    icon: "https://dsp-wiki.com/images/b/b4/Icon_Proliferator_Mk.II.png",
+  },
+  {
+    id: 1143,
+    name: "Proliferator MK.III",
+    icon: "https://dsp-wiki.com/images/c/c4/Icon_Proliferator_Mk.III.png",
+  },
+  {
     id: 1201,
     name: "Gear",
     icon: "https://dsp-wiki.com/images/8/87/Icon_Gear.png",
@@ -739,6 +907,11 @@ export const dspItems: DSPItem[] = [
     icon: "https://dsp-wiki.com/images/2/2f/Icon_Quantum_Chip.png",
   },
   {
+    id: 1401,
+    name: "Plasma Exciter",
+    icon: "https://dsp-wiki.com/images/c/cc/Icon_Plasma_Exciter.png",
+  },
+  {
     id: 1402,
     name: "Particle Boardband",
     icon: "https://dsp-wiki.com/images/b/b6/Icon_Particle_Broadband.png",
@@ -747,6 +920,21 @@ export const dspItems: DSPItem[] = [
     id: 1406,
     name: "Reinforced thruster",
     icon: "https://dsp-wiki.com/images/3/3d/Icon_Reinforced_Thruster.png",
+  },
+  {
+    id: 2001,
+    name: "Conveyor belt MK.I",
+    icon: "https://dsp-wiki.com/images/7/78/Icon_Conveyor_Belt_Mk.I.png",
+  },
+  {
+    id: 2002,
+    name: "Conveyor belt MK.II",
+    icon: "https://dsp-wiki.com/images/3/38/Icon_Conveyor_Belt_Mk.II.png",
+  },
+  {
+    id: 2003,
+    name: "Conveyor belt MK.III",
+    icon: "https://dsp-wiki.com/images/1/18/Icon_Conveyor_Belt_Mk.III.png",
   },
   {
     id: 2103,
@@ -762,6 +950,11 @@ export const dspItems: DSPItem[] = [
     id: 2105,
     name: "Orbital Collector",
     icon: "https://dsp-wiki.com/images/6/64/Icon_Orbital_Collector.png",
+  },
+  {
+    id: 2201,
+    name: "Tesla Tower",
+    icon: "https://dsp-wiki.com/images/f/f1/Icon_Tesla_Tower.png",
   },
   {
     id: 2206,
@@ -781,6 +974,41 @@ export const dspItems: DSPItem[] = [
   {
     id: 2310,
     name: "Miniature particle collider",
+    icon: "https://dsp-wiki.com/images/a/aa/Icon_Miniature_Particle_Collider.png",
+  },
+  {
+    id: 2313,
+    name: "Spray coater",
+    icon: "https://dsp-wiki.com/images/9/99/Icon_Spray_Coater.png",
+  },
+  {
+    id: 2302,
+    name: "Arc smelter",
+    icon: "https://dsp-wiki.com/images/6/60/Icon_Arc_Smelter.png",
+  },
+  {
+    id: 2203,
+    name: "Wind turbine",
+    icon: "https://dsp-wiki.com/images/1/14/Icon_Wind_Turbine.png",
+  },
+  {
+    id: 2303,
+    name: "Assembling machine Mk.I",
+    icon: "https://dsp-wiki.com/images/8/8e/Icon_Assembling_Machine_Mk.I.png",
+  },
+  {
+    id: 2308,
+    name: "Oil refinery",
+    icon: "https://dsp-wiki.com/images/7/74/Icon_Oil_Refinery.png",
+  },
+  {
+    id: 2309,
+    name: "Chemical plant",
+    icon: "https://dsp-wiki.com/images/f/f9/Icon_Chemical_Plant.png",
+  },
+  {
+    id: 2310,
+    name: "Miniature Particle Collider",
     icon: "https://dsp-wiki.com/images/a/aa/Icon_Miniature_Particle_Collider.png",
   },
   {
@@ -806,6 +1034,22 @@ export const convertIconWikiIconToLocal = (icon: string): string => {
   return `/assets/img/${filename}`;
 };
 
+export const findRecipe = (id: number): Recipe | undefined => {
+  return dspRecipes.find((recipe) =>
+    recipe.result.some((result) => result[1] === id)
+  );
+};
+
+export const findRecipes = (id: number): Recipe[] => {
+  const results = dspRecipes.filter((recipe) =>
+    recipe.result.some((result) => {
+      return result[1] === id;
+    })
+  );
+
+  return results;
+};
+
 export const calculateRequirements = ([requestedAmount, requestedItemId]: [
   number,
   number
@@ -813,11 +1057,9 @@ export const calculateRequirements = ([requestedAmount, requestedItemId]: [
   // look up all crafts that create this item
 
   const recipes = dspRecipes.filter(({ result }) => {
-    return (
-      result.filter(([_, id]) => {
-        return id === requestedItemId;
-      }).length > 0
-    );
+    return result.some(([_, id]) => {
+      return id === requestedItemId;
+    });
   });
 
   if (recipes.length === 0) {

@@ -1,14 +1,37 @@
-# React Starter
+# Dyson Perfect Calculator
 
-React 16.8 starter with StyledComponents 5, Normalize.css 8
-Webpack 4 with React Hot Loader, React Hot Dom, Babel 7, ESLint 5, Stylelint 10, Jest 24
+Was an idea to create a calculator that would help in making perfect ratio's.
 
-This is what I currently like to use as a starter mix. Has Workbox added but not implemented. Can be implemented like this in your application.
+Currently, showcases nested recipes and showing the amount needed.
+
+There are other calculators out there that do most of the calculations to create ratios, so I felt less inclined to make this complete. Might come back later and fill out the rest of the buildings and add a perfect ratio calculator. Or maybe you want to give it a try?
+
+![screenshot](https://user-images.githubusercontent.com/15027/208179131-ec8b2c5e-e324-4d88-94fa-2de0bc53bbce.png)
+
+## Development
+
+### Install
 
 ```
-if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => {
-		navigator.serviceWorker.register('/workbox.js')
-	})
-}
+yarn install
 ```
+
+### Dev
+
+To develop with
+
+```
+yarn dev
+```
+
+### Build
+
+Make a version to deploy
+
+```
+yarn build
+```
+
+### Sync
+
+Sync icons if you add new ones (will download the icon in the URL in the recipe list)

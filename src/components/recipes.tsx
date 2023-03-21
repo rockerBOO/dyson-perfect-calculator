@@ -1,7 +1,6 @@
-import Tippy from "@tippyjs/react";
-import { findIcon, findName, dspRecipes } from "../data";
-import Item, { ItemBlock } from "./item";
 import styled from "styled-components";
+import { dspRecipes, findIcon, typeToItems } from "../data";
+import { ItemBlock } from "./item";
 
 const List = styled.div`
   display: grid;
@@ -23,11 +22,21 @@ const Recipes = () => {
             <Recipe key={craft.type + i} className="recipe">
               <div className="results">
                 {craft.result.map(([amount, itemId]) => {
-                  return <ItemBlock key={itemId} amount={amount} item={itemId} />;
+                  return (
+                    <ItemBlock key={itemId} amount={amount} item={itemId} />
+                  );
                 })}
               </div>
 
-              <div className="craft-type">{craft.type}</div>
+              <div className="craft-type">
+                <img
+                  src={findIcon(typeToItems(craft.type)[0])}
+                  width={32}
+                  style={{ maxHeight: 32 }}
+                  alt={craft.type}
+                />{" "}
+                {craft.type}
+              </div>
               <div className="time">{craft.time}s</div>
               <div className="requirements">
                 {craft.requirements.map(([amount, item]) => (

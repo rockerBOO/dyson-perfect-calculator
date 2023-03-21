@@ -1,5 +1,7 @@
 import Tippy from "@tippyjs/react";
 import { calculateRequirements, findIcon, findName } from "../data";
+import { Tooltip } from "./tooltip";
+import { animated, useSpring } from "react-spring";
 
 export const ItemBlock = ({
   amount,
@@ -8,13 +10,43 @@ export const ItemBlock = ({
   amount: number;
   item: number;
 }) => {
+  const config = { tension: 500, friction: 30 };
+  const initialStyles = { opacity: 0, transform: "scale(0.8)" };
+  const [props, setSpring] = useSpring(() => initialStyles);
+
+  function onMount() {
+    setSpring({
+      opacity: 1,
+      transform: "scale(1)",
+      onRest: () => {},
+      config,
+    });
+  }
+
+  function onHide({ unmount }: { unmount: () => void }) {
+    setSpring({
+      ...initialStyles,
+      onRest: unmount,
+      config: { ...config, clamp: true },
+    });
+  }
+
   return (
     <div className="item-result-item">
       <div className="item-result-item-block">
         <div className="item-amount">{amount}</div>
         <div className="item-icon">
-          <Tippy content={findName(item)}>
-            <img src={findIcon(item)} alt={findName(item)} width={22} />
+          <Tippy
+            render={(attrs) => (
+              <animated.div style={props} {...attrs}>
+                <Tooltip id={item} />
+              </animated.div>
+            )}
+            animation={true}
+            onMount={onMount}
+            onHide={onHide}
+          >
+						<img src={findIcon(item)} alt={findName(item)} width={44} style={{maxWidth: 44}} />
           </Tippy>
           <div className="item-name">{findName(item)}</div>
         </div>

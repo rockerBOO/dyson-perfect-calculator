@@ -7,20 +7,20 @@ import { dspItems } from "./src/data.ts";
 
 import { writableStreamFromWriter } from "https://deno.land/std@0.118.0/streams/mod.ts";
 
-console.log("Syncing all times")
+console.log("Syncing all items");
 
 dspItems.map(async (item) => {
   const url = new URL(item.icon);
   const pathname = url.pathname;
   const filename = pathname.substring(pathname.lastIndexOf("/") + 1);
 
-  const file = `src/img/${filename}`;
+  const file = `assets/img/${filename}`;
 
-  return Deno.open(file).catch(() => {
+  return Deno.open(file).catch(async () => {
     return fetch(item.icon, {
       headers: {
         "User-Agent":
-          "Dyson Perfect Calculator/0.1 https://dysoncalc.rockerboo.net",
+          "Dyson Perfect Calculator/0.1 https://dysoncalc.rockerboo.net hello@davelage.com",
       },
     }).then(async (res) => {
       // save to file
@@ -35,7 +35,6 @@ dspItems.map(async (item) => {
   });
 });
 
-
-console.log("Sync complete.")
+console.log("Sync complete.");
 
 export default {};

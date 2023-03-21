@@ -10,6 +10,7 @@ import {
 } from "../data";
 import Item from "./item";
 import Recipes from "./recipes";
+import { Tree } from "./tree";
 
 const onChange: (
   setFunction: (value: string | undefined) => void
@@ -32,17 +33,20 @@ const Calculator: React.FunctionComponent = () => {
       </div>
       <form>
         <section className="item-selector" style={{}}>
-          {/* <div className="calculations"> */}
-          {/*   <label htmlFor="amount">Amount per second</label> */}
-          {/*   <input */}
-          {/*     id="amount" */}
-          {/*     type="text" */}
-          {/*     name="amount" */}
-          {/*     value={amount} */}
-          {/*     placeholder="amount per second" */}
-          {/*     onChange={onChange(setAmount)} */}
-          {/*   /> */}
-          {/* </div> */}
+          <div className="calculations">
+            <label htmlFor="amount">Amount per second</label>
+            <input
+              id="amount"
+              type="text"
+              name="amount"
+              value={amount}
+              placeholder="amount per second"
+              onChange={onChange(setAmount)}
+            />
+          </div>
+          <div>
+            <Tree />
+          </div>
           <div className="calculator-options">
             <div className="selected-option-item">
               {item ? <Item key={item.id} item={item.id} /> : <></>}
@@ -50,15 +54,15 @@ const Calculator: React.FunctionComponent = () => {
             <div className="items">
               {dspItems.map((item) => (
                 <div
-									className="item-icon"
+                  className="item-icon"
                   key={item.name}
-									onClick={() => {
-										selectItem(item)
-window.scrollTo(0, 0)
-									}}
+                  onClick={() => {
+                    selectItem(item);
+                    window.scrollTo(0, 0);
+                  }}
                   style={{ cursor: "pointer" }}
                 >
-                  <Tippy content={item.name}>
+                  <Tippy content={`${item.name}-${item.id}`}>
                     <img src={findIcon(item.id)} width={44} alt={item.name} />
                   </Tippy>
                 </div>
