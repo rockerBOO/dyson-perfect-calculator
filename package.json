@@ -15,7 +15,7 @@
 		"@types/mocha": "^9.0.0",
 		"@types/node": "^18.11.10",
 		"@types/prettier": "^2",
-		"@types/react": "^18.0.25",
+		"@types/react": "^18.2.7",
 		"@types/react-dom": "^17.0.11",
 		"@types/react-is": "^17",
 		"@types/styled-components": "^5",
