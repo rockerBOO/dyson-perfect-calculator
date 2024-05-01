@@ -26,7 +26,7 @@
 		"eslint": "^8.28.0",
 		"eslint-plugin-compat": "^4.0.0",
 		"eslint-plugin-react": "^7.26.1",
-		"eslint-plugin-react-hooks": "^4.2.0",
+		"eslint-plugin-react-hooks": "^4.6.2",
 		"esm": "^3.2.22",
 		"fork-ts-checker-webpack-plugin": "^6.5.0",
 		"generate-json-webpack-plugin": "^2.0.0",
